@@ -1,0 +1,6 @@
+use_frameworks!
+target 'NKPhoneInputView_Tests' do
+  pod 'NKPhoneInputView', :path => '../'
+  
+  
+end
