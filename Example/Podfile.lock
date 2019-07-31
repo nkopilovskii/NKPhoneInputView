@@ -1,0 +1,16 @@
+PODS:
+  - NKPhoneInputView (0.1.0)
+
+DEPENDENCIES:
+  - NKPhoneInputView (from `../`)
+
+EXTERNAL SOURCES:
+  NKPhoneInputView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  NKPhoneInputView: 7ca5d6133e4fe1f221ad5e9ceb9c4fd1768852cf
+
+PODFILE CHECKSUM: 3ef2df920016370022bd72b61091acbb0af33b51
+
+COCOAPODS: 1.7.3

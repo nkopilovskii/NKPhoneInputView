@@ -1,0 +1,6 @@
+framework module NKPhoneInputView {
+  umbrella header "NKPhoneInputView-umbrella.h"
+
+  export *
+  module * { export * }
+}
