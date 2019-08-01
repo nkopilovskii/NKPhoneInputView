@@ -1,5 +1,5 @@
 use_frameworks!
-target 'NKPhoneInputView_Tests' do
+target 'Example' do
   pod 'NKPhoneInputView', :path => '../'
   
   

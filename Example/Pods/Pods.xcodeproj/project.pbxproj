@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0F2D40DF9BAFE1972A5832FEF180A0FE /* Pods-NKPhoneInputView_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 787A7E1324E07465D0998BC81D430F73 /* Pods-NKPhoneInputView_Tests-dummy.m */; };
-		3902D79022F1826B008E634E /* PhoneInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D78F22F1826B008E634E /* PhoneInputView.swift */; };
+		3902D79022F1826B008E634E /* NKPhoneInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D78F22F1826B008E634E /* NKPhoneInputView.swift */; };
 		3902D79222F182CE008E634E /* NKPhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D79122F182CE008E634E /* NKPhoneNumber.swift */; };
 		3902D79B22F18403008E634E /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D79922F18403008E634E /* UITextField.swift */; };
 		3902D79C22F18403008E634E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D79A22F18403008E634E /* String.swift */; };
+		3902D7B422F1ACAD008E634E /* NKPhoneInputViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3902D7B322F1ACAD008E634E /* NKPhoneInputViewDelegate.swift */; };
 		4AD77344C795FB3E67BD8FA26912FA54 /* NKPhoneInputView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E3CA267BD45D960D1BBFD2C2AD3B60 /* NKPhoneInputView-dummy.m */; };
 		67D0D2AEB56F52A5FD0475E3B6C35762 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		8B89A49AE864C429A6D75881D7972540 /* Pods-NKPhoneInputView_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F660384EFA76C188C94F1A1F3FB4575E /* Pods-NKPhoneInputView_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,10 +37,11 @@
 		2D4518EE8F1DD0E814C4C1E38112D0C8 /* NKPhoneInputView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NKPhoneInputView-umbrella.h"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		34C7F4259BCDEF2902917DC969D3B99E /* NKPhoneInputView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NKPhoneInputView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3902D78F22F1826B008E634E /* PhoneInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhoneInputView.swift; path = NKPhoneInputView/Classes/PhoneInputView.swift; sourceTree = "<group>"; };
+		3902D78F22F1826B008E634E /* NKPhoneInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NKPhoneInputView.swift; path = NKPhoneInputView/Classes/NKPhoneInputView.swift; sourceTree = "<group>"; };
 		3902D79122F182CE008E634E /* NKPhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NKPhoneNumber.swift; path = NKPhoneInputView/Classes/NKPhoneNumber.swift; sourceTree = "<group>"; };
 		3902D79922F18403008E634E /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		3902D79A22F18403008E634E /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		3902D7B322F1ACAD008E634E /* NKPhoneInputViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NKPhoneInputViewDelegate.swift; path = NKPhoneInputView/Classes/NKPhoneInputViewDelegate.swift; sourceTree = "<group>"; };
 		3D2CF98B0E896D3D22998A704B43989D /* NKPhoneInputView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NKPhoneInputView.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		43EDC4C0D4874899D9064F7F16593E58 /* Pods_NKPhoneInputView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NKPhoneInputView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9AA271EBF882E53D7FE706BDB57F14 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -115,7 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				3902D79822F18403008E634E /* Extensions */,
-				3902D78F22F1826B008E634E /* PhoneInputView.swift */,
+				3902D78F22F1826B008E634E /* NKPhoneInputView.swift */,
+				3902D7B322F1ACAD008E634E /* NKPhoneInputViewDelegate.swift */,
 				3902D79122F182CE008E634E /* NKPhoneNumber.swift */,
 				70FF3FDAA4867234978B4D6BAB60979D /* Pod */,
 				4E073D94957D8C5F03D589FF19CF05D8 /* Support Files */,
@@ -310,8 +313,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3902D79022F1826B008E634E /* PhoneInputView.swift in Sources */,
+				3902D79022F1826B008E634E /* NKPhoneInputView.swift in Sources */,
 				4AD77344C795FB3E67BD8FA26912FA54 /* NKPhoneInputView-dummy.m in Sources */,
+				3902D7B422F1ACAD008E634E /* NKPhoneInputViewDelegate.swift in Sources */,
 				3902D79C22F18403008E634E /* String.swift in Sources */,
 				3902D79222F182CE008E634E /* NKPhoneNumber.swift in Sources */,
 				3902D79B22F18403008E634E /* UITextField.swift in Sources */,
@@ -346,7 +350,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NKPhoneInputView/NKPhoneInputView-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NKPhoneInputView/NKPhoneInputView-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/NKPhoneInputView/NKPhoneInputView.modulemap";
 				PRODUCT_MODULE_NAME = NKPhoneInputView;
@@ -568,7 +572,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NKPhoneInputView/NKPhoneInputView-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NKPhoneInputView/NKPhoneInputView-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/NKPhoneInputView/NKPhoneInputView.modulemap";
 				PRODUCT_MODULE_NAME = NKPhoneInputView;

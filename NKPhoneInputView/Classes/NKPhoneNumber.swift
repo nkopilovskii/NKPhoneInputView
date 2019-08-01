@@ -8,7 +8,7 @@
 import Foundation
 
 //MARK: - PhoneNumber
-struct NKPhoneNumber: Codable {
+public struct NKPhoneNumber: Codable {
   static let cPhoneNumberLength = 12
   private static let cPlaceholderCodeLength = 3
   
@@ -40,7 +40,7 @@ struct NKPhoneNumber: Codable {
 }
 
 //MARK: - CountryCode
-extension NKPhoneNumber {
+public extension NKPhoneNumber {
   struct CountryCode: Codable {
     let name: String
     let countryCode: String

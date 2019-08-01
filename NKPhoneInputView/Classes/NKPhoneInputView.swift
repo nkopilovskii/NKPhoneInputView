@@ -8,25 +8,12 @@
 
 import UIKit
 
-public protocol PhoneInputViewDelegate: class {
-  func didBeginEditing(_ phoneInputView: NKPhoneInputView)
-  func needsEnterCode(_ phoneInputView: NKPhoneInputView)
-  func didFinishEditing(_ phoneInputView: NKPhoneInputView)
-}
 
-class NKPhoneInputView: UIView {
-  @IBOutlet var contentView: UIView!
-  @IBOutlet private weak var lblPhoneNumber: UILabel!
-  @IBOutlet private weak var txtCode: UITextField!
-  @IBOutlet private weak var txtNumber: UITextField!
+
+open class NKPhoneInputView: UIView {
   
-  @IBOutlet weak var constraintWidthTxtCode: NSLayoutConstraint!
-  
-  weak var delegate: PhoneInputViewDelegate?
-  
-  var phoneNumber = NKPhoneNumber() {
+  public var phoneNumber = NKPhoneNumber() {
     didSet {
-      
       txtCode.placeholder = phoneNumber.codePlaceholder
       txtNumber.placeholder = phoneNumber.phonePlaceholder
       
@@ -39,44 +26,100 @@ class NKPhoneInputView: UIView {
       txtCode.text = code.flag + " +" + code.phoneCode
       txtNumber.text = phoneNumber.number
       
-      constraintWidthTxtCode.constant = txtCode.contentWidth
+      if subviews.contains(txtCode) {
+        txtCode.widthAnchor.constraint(equalToConstant: txtCode.contentWidth).isActive = true
+      }
+      
       layoutIfNeeded()
     }
   }
   
+  public weak var delegate: PhoneInputViewDelegate?
+  
+  public var title = "Enter phone number:" {
+    didSet {
+      configLblTitle()
+    }
+  }
+  
+  public var titleColor = UIColor.black{
+    didSet {
+      configLblTitle()
+    }
+  }
+  
+  public var titleFont = UIFont.systemFont(ofSize: 12){
+    didSet {
+      configLblTitle()
+    }
+  }
+  
+  
+  
+  public var textColor = UIColor.black {
+    didSet {
+      configTxtCode()
+      configTxtNumber()
+    }
+  }
+  
+  public var textFont = UIFont.systemFont(ofSize: 14) {
+    didSet {
+      configTxtCode()
+      configTxtNumber()
+    }
+  }
+  
+  public var contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8) {
+    didSet {
+      setupUI()
+    }
+  }
+  
+  public var contentElementsIndent = CGFloat(4) {
+    didSet {
+      setupUI()
+    }
+  }
+  
+  public var phoneElementsIndent = CGFloat(4) {
+    didSet {
+      setupTxtCode()
+    }
+  }
+  
+  private var lblTitle = UILabel()
+  private var txtCode = UITextField()
+  private var txtNumber = UITextField()
+  
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
-    commonInit()
+    setupUI()
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    commonInit()
+    setupUI()
   }
   
-  private func commonInit() {
-    Bundle.main.loadNibNamed("PhoneInputView", owner: self, options: nil)
-    addSubview(contentView)
-    contentView.translatesAutoresizingMaskIntoConstraints = false
-    contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-    contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-    contentView.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-    contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-  }
-  
-  override func awakeFromNib() {
+  override open func awakeFromNib() {
     super.awakeFromNib()
     txtCode.placeholder = phoneNumber.codePlaceholder
     txtNumber.placeholder = phoneNumber.phonePlaceholder
-    constraintWidthTxtCode.constant = txtCode.contentWidth
+    
+    txtCode.widthAnchor.constraint(equalToConstant: txtCode.contentWidth).isActive = true
+    
     layoutIfNeeded()
   }
   
 }
 
+
+//MARK: - UITextFieldDelegate implementation
 extension NKPhoneInputView: UITextFieldDelegate {
   
-  func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+  public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
     guard textField != txtCode else {
       delegate?.needsEnterCode(self)
       return false
@@ -90,19 +133,19 @@ extension NKPhoneInputView: UITextFieldDelegate {
     return true
   }
   
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+  public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
   
-  func textFieldDidEndEditing(_ textField: UITextField) {
+  public func textFieldDidEndEditing(_ textField: UITextField) {
     guard textField == txtNumber else {
       delegate?.didFinishEditing(self)
       return
     }
   }
   
-  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+  public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     guard textField != txtCode else { return false }
     
     guard !string.catchBackspace() else { return true }
@@ -113,3 +156,64 @@ extension NKPhoneInputView: UITextFieldDelegate {
 }
 
 
+extension NKPhoneInputView {
+  
+  func setupUI() {
+    setupLblTitle()
+    setupTxtCode()
+    setupTxtNumber()
+    
+    configLblTitle()
+    configTxtCode()
+    configTxtNumber()
+  }
+  
+  func setupLblTitle() {
+    addSubview(lblTitle)
+    
+    lblTitle.translatesAutoresizingMaskIntoConstraints = false
+    lblTitle.topAnchor.constraint(equalTo: topAnchor, constant: contentInset.top).isActive = true
+    lblTitle.leftAnchor.constraint(equalTo: leadingAnchor, constant: contentInset.left).isActive = true
+    lblTitle.rightAnchor.constraint(equalTo: trailingAnchor, constant: contentInset.right).isActive = true
+  }
+  
+  func setupTxtCode() {
+    addSubview(txtCode)
+    txtCode.translatesAutoresizingMaskIntoConstraints = false
+    txtCode.topAnchor.constraint(equalTo: lblTitle.bottomAnchor, constant: contentElementsIndent).isActive = true
+    txtNumber.bottomAnchor.constraint(equalTo: bottomAnchor, constant: contentInset.bottom).isActive = true
+    txtCode.leadingAnchor.constraint(equalTo: lblTitle.leadingAnchor, constant: contentInset.left).isActive = true
+  }
+  
+  func setupTxtNumber() {
+    addSubview(txtNumber)
+    txtNumber.translatesAutoresizingMaskIntoConstraints = false
+    txtNumber.topAnchor.constraint(equalTo: txtCode.topAnchor).isActive = true
+    txtNumber.bottomAnchor.constraint(equalTo: txtCode.bottomAnchor).isActive = true
+    txtNumber.leftAnchor.constraint(equalTo: txtCode.trailingAnchor, constant: phoneElementsIndent).isActive = true
+    txtNumber.trailingAnchor.constraint(equalTo: lblTitle.trailingAnchor, constant: contentInset.right).isActive = true
+  }
+  
+  
+  func configLblTitle() {
+    lblTitle.font = titleFont
+    lblTitle.textColor = titleColor
+    lblTitle.textAlignment = .left
+    lblTitle.text = title
+  }
+  
+  func configTxtCode() {
+    txtCode.font = textFont
+    txtCode.textColor = textColor
+    txtCode.textAlignment = .right
+    txtCode.backgroundColor = .clear
+  }
+  
+  func configTxtNumber() {
+    txtCode.font = textFont
+    txtCode.textColor = textColor
+    txtCode.textAlignment = .left
+    txtCode.backgroundColor = .clear
+  }
+  
+}
